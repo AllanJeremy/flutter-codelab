@@ -6,11 +6,21 @@ void main() => runApp(new ColorChangerApp(appTitle: 'Frostnight'));
 
 class ColorChangerApp extends StatefulWidget {
   
+  static final Color bottomNavIconColor = Colors.black54;
+  static final double bottomNavIconSize = 96.0;
+
   final TextStyle light16GreyText = TextStyle(
     fontSize: 16.0,
     color: Colors.blueGrey,
     fontWeight: FontWeight.w300
   );
+
+  final TextStyle bottomNavTextStyle = TextStyle(
+    fontSize: 14.0,
+    color: bottomNavIconColor,
+    fontWeight: FontWeight.w300
+  );
+
   //Colors we can toggle through
   final List<Color> _appBarColors = [
     Colors.red,
@@ -67,7 +77,7 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My custom counter',
+      title: 'Startup name generator',
       home: new Scaffold(
         appBar: AppBar(
             backgroundColor: this.appBarColor,
@@ -84,12 +94,14 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
               ]
             )
         ),
+        
         floatingActionButton: FloatingActionButton(
           backgroundColor: this.appBarColor,
           child: Icon(Icons.edit),
           tooltip: 'Change the background color of the button & appbar',
           onPressed: _updateColorAndWords,
         ),
+
         body: Container(
           padding: EdgeInsets.all(24.0),
           child: Center(
@@ -110,7 +122,59 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
               ]
             ),
           ),
-        )
+        ),
+
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 1,
+          iconSize: ColorChangerApp.bottomNavIconSize,
+        
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              title: Text(
+                'Cloud',
+                style: widget.bottomNavTextStyle,
+              ),
+              icon: Icon(
+                Icons.cloud,
+                color:ColorChangerApp.bottomNavIconColor,
+                
+              ),
+            ),
+            BottomNavigationBarItem(
+              title: Text(
+                'Maps',
+                style: widget.bottomNavTextStyle,
+              ),
+              icon: Icon(
+                Icons.map,
+                color:ColorChangerApp.bottomNavIconColor,
+                
+              ),
+            ),
+            BottomNavigationBarItem(
+              backgroundColor: Colors.redAccent,
+              title: Text(
+                'Chat',
+                style: widget.bottomNavTextStyle,
+              ),
+              icon: Icon(
+                Icons.message,
+                color:ColorChangerApp.bottomNavIconColor,
+                
+              ),
+            ),
+            BottomNavigationBarItem(
+              title: Text(
+                'Privacy',
+                style: widget.bottomNavTextStyle,
+              ),
+              icon: Icon(
+                Icons.lock,
+                color:ColorChangerApp.bottomNavIconColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
