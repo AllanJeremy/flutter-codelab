@@ -5,6 +5,12 @@ import 'package:english_words/english_words.dart';
 void main() => runApp(new ColorChangerApp(appTitle: 'Frostnight'));
 
 class ColorChangerApp extends StatefulWidget {
+  
+  final TextStyle light16GreyText = TextStyle(
+    fontSize: 16.0,
+    color: Colors.blueGrey,
+    fontWeight: FontWeight.w300
+  );
   //Colors we can toggle through
   final List<Color> _appBarColors = [
     Colors.red,
@@ -23,6 +29,7 @@ class ColorChangerApp extends StatefulWidget {
 
 class _ColorChangerAppState extends State<ColorChangerApp> {
   Color appBarColor;
+  WordPair randomWords;
 
   //Returns a random color from the list we have provided
   Color _getRandomColor() {
@@ -34,16 +41,17 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
   }
 
   //Sets the new state/color of the appbars and stuff
-  void _updateColor() {
+  void _updateColorAndWords() {
     // Keep track of last color to ensure we always change the color
     Color lastAppBarColor = appBarColor;
 
     setState(() {
-      appBarColor = this._getRandomColor();
+      randomWords = WordPair.random();
+      this.appBarColor = this._getRandomColor();
 
       //If the new appbar color is the same as the last one, then try changing it again
       if (appBarColor == lastAppBarColor) {
-        this._updateColor();
+        this._updateColorAndWords();
       }
     });
   }
@@ -52,7 +60,7 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
   @override
   initState() {
     super.initState();
-    this.appBarColor = this._getRandomColor();
+    this._updateColorAndWords();
   }
 
   @override
@@ -76,17 +84,36 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
               ]
             )
         ),
-        body: Center(
-          child: RaisedButton(
-            child: Text(
-              'Click me to change color',
-              style: TextStyle(fontSize: 18.0),
+        body: Container(
+          padding: EdgeInsets.all(24.0),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Some random words that will change every single time you click the button',
+                  style: widget.light16GreyText
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical:16.0),
+                  child: Text(
+                    randomWords.asPascalCase,
+                  ),
+                ),
+
+                RaisedButton(
+                  child: Text(
+                    "Tap me, I don't bite",
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  onPressed: _updateColorAndWords,
+                  color: appBarColor,
+                  textColor: Colors.white,
+                ),
+              ]
             ),
-            onPressed: _updateColor,
-            color: appBarColor,
-            textColor: Colors.white,
           ),
-        ),
+        )
       ),
     );
   }
