@@ -84,6 +84,12 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
               ]
             )
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: this.appBarColor,
+          child: Icon(Icons.edit),
+          tooltip: 'Change the background color of the button & appbar',
+          onPressed: _updateColorAndWords,
+        ),
         body: Container(
           padding: EdgeInsets.all(24.0),
           child: Center(
@@ -101,15 +107,6 @@ class _ColorChangerAppState extends State<ColorChangerApp> {
                   ),
                 ),
 
-                RaisedButton(
-                  child: Text(
-                    "Tap me, I don't bite",
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  onPressed: _updateColorAndWords,
-                  color: appBarColor,
-                  textColor: Colors.white,
-                ),
               ]
             ),
           ),
