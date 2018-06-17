@@ -7,7 +7,7 @@ void main() => runApp(new ColorChangerApp(appTitle: 'Frostnight'));
 class ColorChangerApp extends StatefulWidget {
   
   static final Color bottomNavIconColor = Colors.black54;
-  static final double bottomNavIconSize = 96.0;
+  static final double bottomNavIconSize = 36.0;
 
   final TextStyle light16GreyText = TextStyle(
     fontSize: 16.0,

@@ -7,12 +7,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:first_app/main.dart';
+import 'package:singularity/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new ColorChangerApp(appTitle: 'Frostnight'));
+    await tester.pumpWidget(new MyApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
